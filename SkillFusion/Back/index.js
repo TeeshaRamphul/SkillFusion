@@ -11,25 +11,21 @@ app.use(express.urlencoded({ extended : true })); // Body applications/www-x-url
 // Pour pouvoir utiliser le req.body et récupérer le JSON envoyé par le client
 app.use(express.json());
 
-//const allowedOrigin = process.env.ALLOWED_ORIGIN;
-/*
+const allowedOrigin = process.env.ALLOWED_ORIGIN;
+
 app.use(cors({
   origin: (origin, callback) => {
-    // Autoriser localhost/127.0.0.1 en développement
     const localRegex = /^(http:\/\/localhost:\d+|http:\/\/127\.0\.0\.1:\d+)$/;
 
     if (!origin || localRegex.test(origin)) {
-      callback(null, true);
+      callback(null, true); // OK local
     } else if (allowedOrigin && origin === allowedOrigin) {
-      callback(null, true);
+      callback(null, true); // OK Vercel
     } else {
       console.warn(`❌ CORS blocked: ${origin}`);
-      callback(new Error("Not allowed by CORS"));  }
+      callback(new Error("Not allowed by CORS"));
+    }
   },
-}));
-*/
-app.use(cors({
-  origin: ['https://skill-fusion-flame.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
