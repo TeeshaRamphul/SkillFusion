@@ -36,8 +36,7 @@ app.use(xss());
 // Configuration du router
 app.use(router);
 
-// Lancement du serveur
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`🚀 Server started at http://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+  // On écoute sur le port défini dans le fichier .env
+  console.log(`🚀 Listening on ${process.env.BASE_URL}:${process.env.PORT}`); // Affiche l'URL d'écoute
 });
