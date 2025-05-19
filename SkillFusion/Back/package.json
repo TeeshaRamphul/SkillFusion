@@ -5,8 +5,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "db:create": "node src/data/create_tables.sql",
-    "db:seed": "node src/data/seed_database.sql",
+    "db:create": "node src/migrations/createTables.js",
+    "db:seed": "node src/migrations/seedTables.js",
     "db:reset": "npm run db:create && npm run db:seed"
   },
   "type": "module",
