@@ -26,7 +26,7 @@ app.use(cors({
   credentials: true,
   maxAge: 1800
 }));
-
+app.options('*', cors());
 // Body parser
 app.use(express.urlencoded({ extended : true })); // Body applications/www-x-urlencoded
 // Pour pouvoir utiliser le req.body et récupérer le JSON envoyé par le client
