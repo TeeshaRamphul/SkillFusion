@@ -6,13 +6,8 @@ import { xss } from "express-xss-sanitizer";
 
 // Création de l'app Express
 const app = express();
-// Body parser
-app.use(express.urlencoded({ extended : true })); // Body applications/www-x-urlencoded
-// Pour pouvoir utiliser le req.body et récupérer le JSON envoyé par le client
-app.use(express.json());
 
 const allowedOrigin = process.env.ALLOWED_ORIGIN;
-
 app.use(cors({
   origin: (origin, callback) => {
     const localRegex = /^(http:\/\/localhost:\d+|http:\/\/127\.0\.0\.1:\d+)$/;
@@ -32,16 +27,22 @@ app.use(cors({
   maxAge: 1800
 }));
 
-app.use(xss());
+// Body parser
+app.use(express.urlencoded({ extended : true })); // Body applications/www-x-urlencoded
+// Pour pouvoir utiliser le req.body et récupérer le JSON envoyé par le client
+app.use(express.json());
 
-// Configuration du router
-app.use(router);
+app.use(xss());
 
 
 app.get('/', (req, res) => {
   res.send('API Skill Fusion is running');
 });
+
+// Configuration du router
+app.use(router);
+
 app.listen(process.env.PORT, () => {
   // On écoute sur le port défini dans le fichier .env
-  console.log(`🚀 Listening on ${process.env.BASE_URL}:${process.env.PORT}`); // Affiche l'URL d'écoute
+  console.log(`🚀 Listening on port ${process.env.PORT}`); // Affiche l'URL d'écoute
 });
