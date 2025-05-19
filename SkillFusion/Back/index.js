@@ -37,6 +37,10 @@ app.use(xss());
 // Configuration du router
 app.use(router);
 
+
+app.get('/', (req, res) => {
+  res.send('API Skill Fusion is running');
+});
 app.listen(process.env.PORT, () => {
   // On écoute sur le port défini dans le fichier .env
   console.log(`🚀 Listening on ${process.env.BASE_URL}:${process.env.PORT}`); // Affiche l'URL d'écoute
