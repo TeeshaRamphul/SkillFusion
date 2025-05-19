@@ -11,17 +11,25 @@ app.use(express.urlencoded({ extended : true })); // Body applications/www-x-url
 // Pour pouvoir utiliser le req.body et récupérer le JSON envoyé par le client
 app.use(express.json());
 
+
+
+const allowedOrigin = process.env.ALLOWED_ORIGIN;
+
 app.use(cors({
-  // On définit certains noms de domaines qu'on veut autoriser (certaines origines de notre appel)
   origin: (origin, callback) => {
-    // Autoriser toutes les origines "localhost" ou "127.0.0.1", peu importe le port
-    if (!origin || /^(http:\/\/localhost:\d+|http:\/\/127\.0\.0\.1:\d+)$/.test(origin)) {
-      callback(null, true); // Autoriser l'origine
+    // Autoriser localhost/127.0.0.1 en développement
+    const localRegex = /^(http:\/\/localhost:\d+|http:\/\/127\.0\.0\.1:\d+)$/;
+
+    if (!origin || localRegex.test(origin)) {
+      callback(null, true);
+    } else if (allowedOrigin && origin === allowedOrigin) {
+      callback(null, true);
     } else {
-      callback(new Error("Not allowed by CORS")); // Bloquer l'origine
+      callback(new Error("Not allowed by CORS"));
     }
   },
 }));
+
 
 app.use(xss());
 
