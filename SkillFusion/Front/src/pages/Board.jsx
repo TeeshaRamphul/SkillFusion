@@ -67,7 +67,7 @@ export default function Board() {
       <main>
       <section className="head-button">
       {userData?.role_id === 1 ? (
-        <Link to="/newlesson">
+        <Link to="/erreurMaintenance">
           <button className="main-button">Créer un nouveau cours</button>
         </Link>
       ):(
