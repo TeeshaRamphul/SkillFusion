@@ -5,6 +5,7 @@ import { useAuth } from "../services/api";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function ForumDiscussionDetail() {
   const { id } = useParams(); // récupère l'ID de la question depuis l'URL
@@ -13,6 +14,7 @@ export default function ForumDiscussionDetail() {
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -80,7 +82,6 @@ export default function ForumDiscussionDetail() {
     toast.success("Réponse envoyée !");
 
      // Re-fetch de la discussion complète avec toutes les réponses à jour
-
      const updatedRes = await fetch(`${import.meta.env.VITE_API_URL}/forum/${id}`, {
        headers: {
          Authorization: `Bearer ${token}`,
@@ -98,12 +99,14 @@ export default function ForumDiscussionDetail() {
     }
   }
     // Supprimer une réponse
+    
     const handleClickDelete = async (questionId,responseId) => { 
       let isSure = confirm("Etes-vous sûr(e) ?");
       if(!isSure) return;
 
       try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/forum/${questionId}/${responseId}`,{
+  
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -115,9 +118,12 @@ export default function ForumDiscussionDetail() {
        //     throw new Error("Erreur lors de la suppression du message");
           }
           toast.success("Suppression du message réussie !");
-          setResponse((prev) =>
-          prev.filter((response) => response.id !== responseId)); // reset le champ
-      } catch (err) {
+
+          // Redirection vers la liste des réponses
+          navigate(0);
+
+
+        } catch (err) {
         (err.message);
       }
     }
@@ -164,6 +170,7 @@ export default function ForumDiscussionDetail() {
               </div>
               <div className="category-box__desc">
                 <p>{response.text.replace(/^./, (match) => match.toUpperCase())}</p>
+
                 {/* Affiche les boutons de CRD si l'utilisateur a les droits d'admin*/}
                 {user ? (
                   <a onClick={() => handleClickDelete(question.id,response.id)} style={{ cursor: 'pointer' }}>

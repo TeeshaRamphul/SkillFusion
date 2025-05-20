@@ -3,16 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../services/api.jsx";
 import { toast } from "react-toastify";
 
-export default function LessonContainer({ lessons }) {
+export default function LessonContainer({ lessons, categoryName}) {
   const navigate = useNavigate();
   const { user } = useAuth();
 
   // Liste des leçons à afficher
+  console.log(lessons);
+  
   const [lessonList, setLessonList] =  useState(lessons || []);
-  useEffect(() => { setLessonList(lessons || []);
-  }, [lessons]);
-  // Stocke les IDs des leçons favorites de l'utilisateur
-  const [favoriteIds, setFavoriteIds] = useState([]);
+
+    useEffect(() => { setLessonList(lessons || []);
+    }, [lessons]);
+    // Stocke les IDs des leçons favorites de l'utilisateur
+    const [favoriteIds, setFavoriteIds] = useState([]);
 
   // Initialisation des favoris à partir de l'utilisateur connecté
   useEffect(() => {
@@ -21,6 +24,7 @@ export default function LessonContainer({ lessons }) {
     }
   }, [user]);
 
+  
   if (!lessonList.length) {
     return <div>Aucune leçon trouvée.</div>;
   }
@@ -108,7 +112,7 @@ export default function LessonContainer({ lessons }) {
       {lessonList.map((lesson) => (
         <div className="box-lesson" key={lesson.id}>
           <div className="box-lesson__favorites">
-            <h5 className="category-tag">{lesson.category?.name}</h5>
+            <h5 className="category-tag">{lesson.category?.name || categoryName}</h5>
             {user ? (
               <a onClick={() => handleClickFav(lesson.id)} style={{ cursor: "pointer" }}>
                 <p>{favoriteIds.includes(lesson.id) ? "\u2605" : "\u2606"}</p>
@@ -132,6 +136,7 @@ export default function LessonContainer({ lessons }) {
               </div>
             )}
           </div>
+          
           <div className="box-lesson__title">
             <h4>{lesson.name}</h4>
           </div>
@@ -146,3 +151,4 @@ export default function LessonContainer({ lessons }) {
     </section>
   );
 }
+ 

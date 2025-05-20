@@ -22,7 +22,6 @@ export default function ContainerCategories({ categories }) {
       return
     }else{
       try {
-        
         const response = await fetch(`${import.meta.env.VITE_API_URL}/categories/${categoryId}`,{
           method: "DELETE",
           headers: {
@@ -82,6 +81,7 @@ export default function ContainerCategories({ categories }) {
       ))}
 
       {/* Affiche le bouton 'ajouter' si l'utilisateur a les droits d'admin ou prof*/}
+
       <div className="see-more"></div>
       {user && Number(user.role_id) <3 ?
         (

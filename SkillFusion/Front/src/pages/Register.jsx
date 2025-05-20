@@ -93,7 +93,7 @@ export default function Register() {
               <input
                 className="search-bar input-bar"
                 type="password"
-                placeholder="Mot de passe"
+                placeholder="Mini 12 caractères, une maj., une minuscule, un chiffre, un symbole"
                 name="password"
                 id="password"
                 value={password}

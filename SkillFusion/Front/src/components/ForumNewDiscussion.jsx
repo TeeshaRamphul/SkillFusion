@@ -4,7 +4,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { toast } from "react-toastify";
 
-
 export default function ForumNewDiscussion() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");

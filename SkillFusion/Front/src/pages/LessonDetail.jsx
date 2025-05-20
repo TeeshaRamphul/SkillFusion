@@ -4,8 +4,10 @@ import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import DetailContainer from "../components/DetailContainer.jsx";
 import LessonContainer from "../components/LessonContainer.jsx";
-import { useNavigate } from "react-router-dom";
 import ConfirmDeleteModal from "./ConfirmDeleteModal.jsx";
+
+import { useNavigate } from "react-router-dom";
+
 export default function LessonDetail() {
   const { id } = useParams();
   const [lesson, setLesson] = useState(null);
@@ -13,19 +15,29 @@ export default function LessonDetail() {
   const [showModal, setShowModal] = useState(false);
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    setError(null);
+        // Fetch lesson details
     fetch(`${import.meta.env.VITE_API_URL}/lesson/${id}`)
       .then((response) => response.json())
       .then((data) => setLesson(data))
-      .catch((error) => console.error("Erreur API:", error));
+      
 
+    // Fetch all lessons
     fetch(`${import.meta.env.VITE_API_URL}/lessons`)
-      .then((res) => res.json())
-      .then((data) => setLessons(data));
+      .then((response) => response.json())
+      .then((data) => setLessons(Array.isArray(data) ? data : data.lessons || []))
+        }, [id]);
 
-    window.scrollTo(0, 0);
-  }, [id]);
+  useEffect(() => {
+    console.log(lessons);
+  }, [lessons]);
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
 
 
@@ -58,12 +70,21 @@ export default function LessonDetail() {
   }
 
   const suggestions = lessons
-    .filter((l) => l.category?.name === lesson.category?.name && l.name !== lesson.name)
+    .filter(
+      (l) =>
+        l.category?.name === lesson.category?.name && l.name !== lesson.name
+    )
     .slice(0, 2);
 
   // Fonction de suppression
   const handleDelete = async () => {
-    await fetch(`${import.meta.env.VITE_API_URL}/api/lessons/${lesson.id}`, { method: "DELETE" });
+    await fetch(`${import.meta.env.VITE_API_URL}/lesson/${lesson.id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    });
     setShowModal(false);
     navigate("/"); // Redirige vers l'accueil ou la liste des cours après suppression
   };
@@ -78,13 +99,13 @@ export default function LessonDetail() {
         <>
         <button
           className="main-button"
-          style={{ background: "#e74c3c", color: "#fff", margin: "1rem 0" }}
-          onClick={() => setShowModal(true)}
+          onClick={() => navigate(`/lessons`)}
         >
-          Supprimer ce cours
+          Retour au catalogue
         </button>
         </>
         )}
+        
         <ConfirmDeleteModal
           show={showModal}
           onCancel={() => setShowModal(false)}
@@ -92,11 +113,9 @@ export default function LessonDetail() {
           lessonTitle={lesson.name}
         />
         <section>
-          <h2>Suggestion de cours :</h2>
+        <h2>Suggestion de cours :</h2>
           <article className="lessons">
-            {suggestions.map((suggestion) => (
-              <LessonContainer key={suggestion.id} lesson={suggestion} />
-            ))}
+            <LessonContainer lessons={suggestions} />
           </article>
         </section>
       </main>

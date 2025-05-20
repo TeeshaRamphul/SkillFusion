@@ -9,7 +9,7 @@ export const userSchema = Joi.object({
     'any.required': 'Le pseudo est obligatoire.',
   }),
   mail: Joi.string().email().required().messages({
-    'string.empty': 'Le email ne peut pas être vide.',
+    'string.empty': "L'email ne peut pas être vide.",
     'string.email': "L'email doit être valide.",
     'any.required': "L'email est obligatoire."
   }),
@@ -26,7 +26,7 @@ export const userSchema = Joi.object({
     'string.empty': "Le mot de passe est requis.",
     'string.min': "Le mot de passe doit contenir au moins 12 caractères.",
     'string.max': "Le mot de passe ne doit pas dépasser 100 caractères.",
-    'string.pattern.name': "Le mot de passe doit contenir au moins une {#name}.",
+    'string.pattern.name': "Le mot de passe doit contenir au moins un {#name}.",
     'any.required': "Le mot de passe est obligatoire."
   })
 });
@@ -50,7 +50,7 @@ export const userLoginSchema = Joi.object({
     'string.empty': "Le mot de passe est requis.",
     'string.min': "Le mot de passe doit contenir au moins 12 caractères.",
     'string.max': "Le mot de passe ne doit pas dépasser 100 caractères.",
-    'string.pattern.name': "Le mot de passe doit contenir au moins une {#name}.",
+    'string.pattern.name': "Le mot de passe doit contenir au moins un {#name}.",
   })
 });
 
@@ -62,7 +62,7 @@ export const updateUserSchema = Joi.object({
     'string.max': 'Le psuedo ne doit pas dépasser 30 caractères.',
   }),
   mail: Joi.string().email().messages({
-    'string.empty': 'Le email ne peut pas être vide.',
+    'string.empty': "L'email ne peut pas être vide.",
     'string.email': "L'email doit être valide.",
   }),
   password: Joi.string()
@@ -77,7 +77,7 @@ export const updateUserSchema = Joi.object({
     'string.empty': "Le mot de passe est requis.",
     'string.min': "Le mot de passe doit contenir au moins 12 caractères.",
     'string.max': "Le mot de passe ne doit pas dépasser 100 caractères.",
-    'string.pattern.name': "Le mot de passe doit contenir au moins une {#name}.",
+    'string.pattern.name': "Le mot de passe doit contenir au moins un {#name}.",
   })
 });
 
