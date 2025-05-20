@@ -4,6 +4,8 @@ import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import DetailContainer from "../components/DetailContainer.jsx";
 import LessonContainer from "../components/LessonContainer.jsx";
+import ConfirmDeleteModal from "./ConfirmDeleteModal.jsx";
+
 import { useNavigate } from "react-router-dom";
 
 export default function LessonDetail() {
@@ -103,6 +105,7 @@ export default function LessonDetail() {
         </button>
         </>
         )}
+        
         <ConfirmDeleteModal
           show={showModal}
           onCancel={() => setShowModal(false)}
