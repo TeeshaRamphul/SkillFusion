@@ -21,7 +21,7 @@ router.get("/lessons", lessonController.getAllLessons);// affiche la liste des c
 router.get("/lesson/:id", lessonController.getOneLesson);// affiche un cours
 router.post("/lesson", authenticateToken, isAdminOrInstructor, lessonController.addLesson);// ajoute un cours
 router.put("/lesson/:id", authenticateToken, isAdminOrInstructor, lessonController.updateLesson);// modifie un cours
-router.delete("/lesson/:id", authenticateToken, isAdminOrInstructor, lessonController.deleteLesson);// supprime un cours
+router.delete("/lesson/:id", authenticateToken, isAdminOrInstructor, lessonController.deleteLesson);// supprime un cours 
 
 // Routes CATEGORY
 router.get("/categories", categoryController.getAllCategories);// affiche la liste des catégories
