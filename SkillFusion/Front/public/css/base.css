@@ -188,7 +188,7 @@ ul, ol{
   padding: 0.5rem;
   background-color: white;
   border: 1px solid black;
-  border-radius: 10%;
+  border-radius: .4rem;
   display: flex;
     flex-direction: column;
     justify-content: center;
