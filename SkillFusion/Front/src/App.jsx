@@ -20,6 +20,8 @@ import ProfilChange from "./pages/ProfilChanges.jsx";
 import RoleChange from "./pages/RoleChange.jsx";
 import ProtectedRoute from "./services/ProtectedRoute.jsx";
 import PublicRoute from "./services/PublicRoute.jsx";
+import MentionsLegales from "./pages/MentionsLegales.jsx";
+import FAQ from "./pages/FAQ.jsx";
 
 export default function App() {
   return (   
@@ -32,6 +34,8 @@ export default function App() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/categories/:id/lessons" element={<CategoryDetail />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/mentions-legales" element={<MentionsLegales />} />
+        <Route path="/faq" element={<FAQ />} />
 
         {/* Routes protégées accessibles uniquement si connecté */}
         <Route path="/board" element={<ProtectedRoute><Board /></ProtectedRoute>} />
