@@ -20,10 +20,18 @@ export default function MentionsLegales() {
           <h3>Hébergement</h3>
           <p>
             Le site est hébergé par&nbsp;:<br />
-            <em>[Nom de l’hébergeur]</em><br />
-            Adresse&nbsp;: [Adresse de l’hébergeur]<br />
-            Téléphone&nbsp;: [Numéro de l’hébergeur]<br />
-            Site web&nbsp;: [URL de l’hébergeur]
+            Pour le front-end&nbsp;:<br />
+            <em>Vercel Inc.</em><br />
+            Adresse&nbsp;: 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis<br />
+            Téléphone&nbsp;: Non communiqué<br />
+            Site web&nbsp;: https://vercel.com
+          </p>
+          <p>
+            Pour le back-end&nbsp;:<br />
+            <em>Render</em><br />
+            Adresse&nbsp;: Render, 100 Hooper Street, San Francisco, CA 94107, États-Unis<br />
+            Téléphone&nbsp;: Non communiqué<br />
+            Site web&nbsp;: https://render.com
           </p>
         </section>
         <section>
