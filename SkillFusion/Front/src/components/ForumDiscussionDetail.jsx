@@ -141,6 +141,7 @@ export default function ForumDiscussionDetail() {
         </section>
         {/* Sujet */}
         <section className="head-banner">
+          <h3>{question.title.replace(/^./, (match) => match.toUpperCase())}</h3>
           <section className="category-box">
             <div className="category-box__title">
               <p className="forum-post__datas">
