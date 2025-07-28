@@ -6,6 +6,7 @@ const PG_URL = process.env.PG_URL;
 if (!PG_URL) {
   throw new Error('PG_URL environment variable is required');
 }
+console.log('PG_URL:', process.env.PG_URL);
 
 const sequelize = new Sequelize(PG_URL, {
   dialect: 'postgres',
