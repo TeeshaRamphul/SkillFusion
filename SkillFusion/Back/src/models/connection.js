@@ -1,7 +1,7 @@
 import 'dotenv/config'; // Cette ligne DOIT être en haut et sans erreur
 import { Sequelize } from 'sequelize';
 
-const PG_URL = process.env.PG_URL || 'postgres://skillfusion:skill_fusion_1234@localhost:5432/skillfusion';
+const PG_URL = process.env.PG_URL || 'postgresql://skillfusion_api_1avj_user:S69eCdLVEgD2owU6XqfOSMKvd4Mu1IoA@dpg-d23vbrqdbo4c7389cen0-a.frankfurt-postgres.render.com/skillfusion_api_1avj';
 
 if (!PG_URL) {
   throw new Error('PG_URL environment variable is required');
